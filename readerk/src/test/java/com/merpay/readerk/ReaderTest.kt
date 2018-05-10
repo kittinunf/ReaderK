@@ -60,6 +60,6 @@ class ReaderTest {
         //flatMap so it changes to join of all of items
         val newReader = originalReader.flatMap { Reader { l: List<String> -> l.joinToString("&") } }
 
-        assertThat(newReader.read(listOf("1", "2", "3")), equalTo("1-2&3"))
+        assertThat(newReader.read(listOf("1", "2", "3")), equalTo("1&2&3"))
     }
 }
