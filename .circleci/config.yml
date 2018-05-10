@@ -56,13 +56,10 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle.kts" }}
 
-      - run: gradle build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
+      - run: gradle build bintrayUpload -PbintrayUser=$BINTRAY_USERNAME -PbintrayKey=$BINTRAY_KEY -PdryRun=true
 
 workflows:
   version: 2
-  build:
-    jobs:
-      - build
 
   build-and-deploy:
     jobs:
@@ -73,3 +70,7 @@ workflows:
           filters:
             branches:
               only: master
+
+  build:
+    jobs:
+      - build
