@@ -34,16 +34,16 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle.kts" }}
 
-      # run tests!
       - run: gradle test --info
 
   codecov:
-    machine:
-        enabled: true
+    docker:
+      - image: circleci/openjdk:8-jdk
 
     working_directory: ~/repo
 
     steps:
+      - checkout
       - run: gradle jacocoTestReport
       - run: bash <(curl -s https://codecov.io/bash)
 
