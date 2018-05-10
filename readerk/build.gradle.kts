@@ -32,6 +32,7 @@ tasks {
 }
 
 configure<PublishExtension> {
+    uploadName = "ReaderK"
     groupId = "com.mercari.readerk"
     artifactId = "readerk"
     publishVersion = "0.1.0"
