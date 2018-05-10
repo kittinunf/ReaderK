@@ -46,3 +46,15 @@ jobs:
     steps:
       - run: gradle jacocoTestReport
       - run: bash <(curl -s https://codecov.io/bash)
+
+workflows:
+  version: 2
+  build-and-codecov:
+    jobs:
+      - build
+      - codecov:
+          requires:
+            - build
+          filters:
+            branches:
+              only: /*.?/
