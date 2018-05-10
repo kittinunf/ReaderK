@@ -37,9 +37,14 @@ jobs:
       # run tests!
       - run: gradle test --info
 
-    deployment:
-      codecov:
-        branch: /.*?/
-        commands:
-          - gradle jacocoTestReport
-          - bash <(curl -s https://codecov.io/bash)
+  codecov:
+    requires:
+      - build
+
+    filters:
+      branches:
+        only: /.*?/
+
+    steps:
+      - run: gradle jacocoTestReport
+      - run: bash <(curl -s https://codecov.io/bash)
