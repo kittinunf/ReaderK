@@ -36,3 +36,13 @@ jobs:
 
       # run tests!
       - run: gradle test --info
+
+    deployment:
+      codecov:
+        branch: /.*?/
+        commands:
+          - bash <(curl -s https://codecov.io/bash)
+
+
+
+

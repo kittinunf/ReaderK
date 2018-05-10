@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm")
+    id("jacoco-maven-plugin")
 }
 
 dependencies {
