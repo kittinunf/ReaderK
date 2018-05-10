@@ -1,7 +1,11 @@
 plugins {
     kotlin("jvm")
 
-    id("jacoco")
+    jacoco
+}
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
@@ -10,9 +14,15 @@ dependencies {
     testImplementation("junit:junit:4.12")
 }
 
-jacocoTestReport {
-    reports {
-        xml.enabled true
-        html.enabled false
+jacoco {
+    toolVersion = "0.8.1"
+}
+
+tasks {
+    "jacocoTestReport"(JacocoReport::class) {
+        reports {
+            html.isEnabled = false
+            xml.isEnabled = true
+        }
     }
 }
