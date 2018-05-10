@@ -1,7 +1,11 @@
+import com.novoda.gradle.release.PublishExtension
+
 plugins {
     kotlin("jvm")
 
     jacoco
+
+    id("com.novoda.bintray-release")
 }
 
 repositories {
@@ -25,4 +29,13 @@ tasks {
             xml.isEnabled = true
         }
     }
+}
+
+configure<PublishExtension> {
+    groupId = "com.mercari.readerk"
+    artifactId = "readerk"
+    publishVersion = "0.1.0"
+    autoPublish = true
+    desc = "A Reader monad implemented in Kotlin"
+    website = "https://github.com/mercari/ReaderK"
 }
