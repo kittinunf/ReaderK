@@ -38,12 +38,10 @@ jobs:
       - run: gradle test --info
 
   codecov:
-    requires:
-      - build
+    machine:
+        enabled: true
 
-    filters:
-      branches:
-        only: /.*?/
+    working_directory: ~/repo
 
     steps:
       - run: gradle jacocoTestReport
