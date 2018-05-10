@@ -55,6 +55,3 @@ workflows:
       - codecov:
           requires:
             - build
-          filters:
-            branches:
-              only: /*.?/
