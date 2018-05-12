@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation(kotlin("stdlib", "1.2.41"))
+    implementation(kotlin("stdlib", extra.get("kotlinVersion") as String))
 
     testImplementation("junit:junit:4.12")
 }
@@ -35,7 +35,7 @@ configure<PublishExtension> {
     uploadName = "ReaderK"
     groupId = "com.mercari.readerk"
     artifactId = "readerk"
-    publishVersion = "0.1.0"
+    publishVersion = extra.get("publishVersion") as String
     autoPublish = true
     desc = "A Reader monad implemented in Kotlin"
     website = "https://github.com/mercari/ReaderK"

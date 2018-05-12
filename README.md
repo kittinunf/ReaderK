@@ -12,7 +12,6 @@ A Reader monad implemented in Kotlin
 
 It helps you abstract away the computation into the very last moment (until `runReader` function is called). One of the benefit for Reader monad is to make the DI (dependency injection) easy, safe and straightforward.
 
-
 ## Installation
 
 ### Gradle 
