@@ -15,7 +15,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib", extra.get("kotlinVersion") as String))
 
-    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:${extra.get("jUnitVersion")}")
 }
 
 jacoco {
