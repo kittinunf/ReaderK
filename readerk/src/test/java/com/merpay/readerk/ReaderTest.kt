@@ -10,7 +10,7 @@ class ReaderTest {
     fun pure() {
         val just5Reader = Reader.pure<String, Int>(5)
 
-        assertThat(just5Reader.read("1234"), equalTo(5))
+        assertThat(just5Reader.runReader("1234"), equalTo(5))
     }
 
     @Test
@@ -19,14 +19,14 @@ class ReaderTest {
 
         val intToCountLengthReader = countLengthReader.local { i: Int -> i.toString() }
 
-        assertThat(intToCountLengthReader.read(489), equalTo(3))
+        assertThat(intToCountLengthReader.runReader(489), equalTo(3))
     }
 
     @Test
     fun ask() {
         val identityReader = Reader.ask<Boolean>()
 
-        assertThat(identityReader.read(true), equalTo(true))
+        assertThat(identityReader.runReader(true), equalTo(true))
     }
 
     @Test
@@ -37,8 +37,8 @@ class ReaderTest {
         //count the digit of absoluted value
         val newReader = originalReader.map { it.toString().length }
 
-        assertThat(newReader.read(34), equalTo(2))
-        assertThat(newReader.read(-458), equalTo(3))
+        assertThat(newReader.runReader(34), equalTo(2))
+        assertThat(newReader.runReader(-458), equalTo(3))
     }
 
     @Test
@@ -49,17 +49,17 @@ class ReaderTest {
         //map them to be the sum of all number
         val newReader = originalReader.map { it.reduce { acc, item -> acc + item } }
 
-        assertThat(newReader.read(3 to 5), equalTo(15))
+        assertThat(newReader.runReader(3 to 5), equalTo(15))
     }
 
     @Test
     fun flatMap() {
-        //identiy list of string reader
+        //identity list of string reader
         val originalReader = Reader.ask<List<String>>()
 
         //flatMap so it changes to join of all of items
         val newReader = originalReader.flatMap { Reader { l: List<String> -> l.joinToString("&") } }
 
-        assertThat(newReader.read(listOf("1", "2", "3")), equalTo("1&2&3"))
+        assertThat(newReader.runReader(listOf("1", "2", "3")), equalTo("1&2&3"))
     }
 }

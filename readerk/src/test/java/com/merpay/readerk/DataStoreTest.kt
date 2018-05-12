@@ -41,9 +41,9 @@ class DataStoreTest {
         fun set(key: String, value: String): Reader<DataStore, Unit> = Reader { store -> store.set(key, value) }
     }
 
-    val memoryDataStore = MemoryDataStore()
+    private val memoryDataStore = MemoryDataStore()
 
-    val diskDataStore = DiskDataStore("src/test/assets")
+    private val diskDataStore = DiskDataStore("src/test/assets")
 
     init {
         diskDataStore.assetsDir.list { file, s -> file.delete() }
@@ -55,11 +55,11 @@ class DataStoreTest {
         val getFoo1Reader = DataStoreReader.get("foo1")
 
         //this reads(set value) into the memory data store
-        setReader.read(memoryDataStore)
+        setReader.runReader(memoryDataStore)
 
-        //read what we have set earlier
-        assertThat(getFoo1Reader.read(memoryDataStore), equalTo("hello world, reader"))
-        assertThat(DataStoreReader.get("xxx").read(memoryDataStore), equalTo(""))
+        //runReader what we have set earlier
+        assertThat(getFoo1Reader.runReader(memoryDataStore), equalTo("hello world, reader"))
+        assertThat(DataStoreReader.get("xxx").runReader(memoryDataStore), equalTo(""))
     }
 
     @Test
@@ -68,9 +68,9 @@ class DataStoreTest {
         val getFoo1Reader = DataStoreReader.get("foo1")
 
         //this reads(set value) into the disk data store
-        setReader.read(diskDataStore)
+        setReader.runReader(diskDataStore)
 
-        assertThat(getFoo1Reader.read(diskDataStore), equalTo("ReaderK is awesome"))
+        assertThat(getFoo1Reader.runReader(diskDataStore), equalTo("ReaderK is awesome"))
     }
 
     @Test
@@ -82,21 +82,22 @@ class DataStoreTest {
 
             override fun set(key: String, value: String) {
                 //do nothing because this data store just return
+                println("set is called")
             }
 
             override fun get(key: String): String = "STATIC TEXT"
         }
 
         //use with local static data store
-        setBarReader.read(staticDataStore) //actually this doesn't matter, but yeah
-        assertThat(getBarReader.read(staticDataStore), equalTo("STATIC TEXT"))
+        setBarReader.runReader(staticDataStore) //actually this doesn't matter, but yeah
+        assertThat(getBarReader.runReader(staticDataStore), equalTo("STATIC TEXT"))
 
         //use with disk data store
-        val value = setBarReader.flatMap { getBarReader }.map { it + it }.read(diskDataStore)
+        val value = setBarReader.flatMap { getBarReader }.map { it + it }.runReader(diskDataStore)
         assertThat(value, equalTo("arstgkneio'arstgkneio'"))
 
         //use with memory data store
-        val anotherValue = setBarReader.flatMap { getBarReader }.map { "simple value" }.read(memoryDataStore)
+        val anotherValue = setBarReader.flatMap { getBarReader }.map { "simple value" }.runReader(memoryDataStore)
         assertThat(anotherValue, equalTo("simple value"))
     }
 }
