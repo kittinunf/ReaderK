@@ -29,7 +29,7 @@ dependencies {
 
 ```
 
-### Explanation
+## Explanation
 
 `Reader` helps us perform the same computation with different values.
 
@@ -153,7 +153,7 @@ fun test_normalSession() {
 
 This allows us to have operation that is reusable, and simple to understand and easy to test. Plus, there is no `mock`, no clunky setup.
 
-### Features
+## Features
 
 #### [Map](https://github.com/mercari/ReaderK/blob/master/readerk/src/main/java/com/merpay/readerk/Reader.kt#L21) & [Flatmap](https://github.com/mercari/ReaderK/blob/master/readerk/src/main/java/com/merpay/readerk/Reader.kt#L17)
 
