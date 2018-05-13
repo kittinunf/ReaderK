@@ -72,26 +72,26 @@ With Reader monad, you can improve above implementation to take advantage of `Re
 typealias SessionReader<T> = Reader<Session, T>
 
 interface AccountService {
-  fun getAccount(accoundId: String, session: Session): SessionReader<Future<Account>>
-  fun getBalance(account: Account, session: Session): SessionsReader<Future<Amount>>
-  fun getStatement(account: Account, session: Session): SessionReader<Future<Statement>>
+  fun getAccount(accoundId: String): SessionReader<Future<Account>>
+  fun getBalance(account: Account): SessionsReader<Future<Amount>>
+  fun getStatement(account: Account): SessionReader<Future<Statement>>
 }
 
 object ReaderAccounts : AccountService {
   
-  override fun getAccount(accoundId: String, session: Session): SessionReader<Future<Account>> = 
+  override fun getAccount(accoundId: String): SessionReader<Future<Account>> = 
     Reader { session: Session -> 
       session.doSomething() //do something before returning account, check authetication, status etc.
       session.fetchAccount(accountId)
     }
   
-  override fun getBalance(account: Account, session: Session): SessionsReader<Future<Amount>> =
+  override fun getBalance(account: Account): SessionsReader<Future<Amount>> =
     Reader { session: Session ->
       session.doSomething()
       session.fetchAmount(account)
     }
   
-  override fun getStatement(account: Account, session: Session): SessionReader<Future<Statement>> = 
+  override fun getStatement(account: Account): SessionReader<Future<Statement>> = 
     Reader { session: Session ->
       session.doSomething()
       session.fetchStatement(account)
@@ -102,6 +102,8 @@ object ReaderAccounts : AccountService {
 As you can see now, we are using `Reader` to abstract away our dependency usage. `Reader` is meant to be composable so you can do something really cool like chaining a series of steps in one nice operation.
 
 ```` Kotlin
+//somewhere in your application
+
 fun getStatementReader(accountId: String) = 
   ReaderAccounts.getAccount(accountId).flatMap { ReaderAccounts.getStatement(it) }
   
