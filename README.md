@@ -153,7 +153,7 @@ fun test_normalSession() {
 }
 ````
 
-This allows us to have the same (yet pure) operation that is reusable, and simple to understand and easy to test. Plus, there is no `mock`, no clunky setup. Just provide different environments at the different time.
+This allows us to have the same (yet pure) operation that is reusable, and simple to understand and easy to test. Plus, there is no `mock`, no clunky setup. You just provide different environments at the different time. 
 
 ## Features
 
