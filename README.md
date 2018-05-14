@@ -33,7 +33,7 @@ dependencies {
 
 `Reader` helps us perform the same computation with different values.
 
-A simplest use-case for Reader monad is to use as DI (Dependency injection). Let's assume that we have a class that interacts with user account.
+The simplest use-case for Reader monad is to use as a DI (Dependency injection). Let's assume that we have a class that interacts with user account.
 
 ```` Kotlin
 interface AccountService {
@@ -43,7 +43,7 @@ interface AccountService {
 }
 ````
 
-And the concrete implementation like so
+And the concrete implementation like the following
 
 ```` Kotlin
 object Accounts : AccountService {
@@ -62,11 +62,13 @@ object Accounts : AccountService {
 }
 ````
 
-It looks a bit annoying as we need to provide `session` for all of the functions. One can provide a DI at the constructor but it has 2 drawbacks.
-Firstly, your class becomes stateful and it is start to tangled with the construction of your dependency. Secondly, if you have multiple things to pass into constructor,
-the constructor becomes bloated and un-scalable.
+It looks a bit annoying as we need to provide `session` for all of the methods. One can provide a DI at the constructor but it has 2 drawbacks.
 
-With Reader monad, you can improve above implementation to take advantage of `Reader`
+Firstly, your class becomes stateful and it is start to be tangled with the construction of your dependency. 
+
+Secondly, once you have multiple things to pass into constructor, the constructor became bloated and un-scalable.
+
+With Reader monad, you can improve above implementation to take advantage of `Reader` like this.
 
 ```` Kotlin
 typealias SessionReader<T> = Reader<Session, T>
@@ -151,7 +153,7 @@ fun test_normalSession() {
 }
 ````
 
-This allows us to have operation that is reusable, and simple to understand and easy to test. Plus, there is no `mock`, no clunky setup.
+This allows us to have the same (yet pure) operation that is reusable, and simple to understand and easy to test. Plus, there is no `mock`, no clunky setup. Just provide different environments at the different time.
 
 ## Features
 
