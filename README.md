@@ -176,3 +176,7 @@ val accountName = ReaderAccounts.getAccount("1234").map { it.name }.runReader(Se
 #### [Ask](https://github.com/mercari/ReaderK/blob/master/readerk/src/main/java/com/merpay/readerk/Reader.kt#L7)
 
 `ask` is an identity Reader, `ask` will return the environment that it passed on so it can be useful, if you want to pass along the input in the chain.
+
+## Licenses
+
+ReaderK is released under the [MIT](http://opensource.org/licenses/MIT) license.
