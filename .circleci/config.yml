@@ -14,7 +14,9 @@ jobs:
       - checkout
 
       - restore_cache:
-          keys: v1-dependencies-{{ checksum "build.gradle.kts" }}
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle.kts" }}
+          - v1-dependencies-
 
       - run: gradle dependencies
 
@@ -23,9 +25,7 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle.kts" }}
 
-      - run: gradle test --info
-
-      - run: gradle jacocoTestReport
+      - run: gradle codeCoverageReport
 
       - run: bash <(curl -s https://codecov.io/bash)
 
@@ -43,7 +43,9 @@ jobs:
       - checkout
 
       - restore_cache:
-          keys: v1-dependencies-{{ checksum "build.gradle.kts" }}
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle.kts" }}
+          - v1-dependencies-
 
       - run: gradle dependencies
 
@@ -52,9 +54,9 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle.kts" }}
 
-      - run:
+      - run: 
           command: |
-            if [ gradle build bintrayUpload -PbintrayUser=$BINTRAY_USERNAME -PbintrayKey=$BINTRAY_KEY -PdryRun=false ]; then
+            if [ "gradle build bintrayUpload -PbintrayUser=$BINTRAY_USERNAME -PbintrayKey=$BINTRAY_KEY -PdryRun=false" ]; then
               echo "Publish success"
             else
               echo "Publish failure"
