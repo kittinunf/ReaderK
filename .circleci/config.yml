@@ -56,8 +56,13 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle.kts" }}
 
-      - run: gradle build bintrayUpload -PbintrayUser=$BINTRAY_USERNAME -PbintrayKey=$BINTRAY_KEY -PdryRun=false || exit 0
-
+      - run: 
+          - >
+            if gradle build bintrayUpload -PbintrayUser=$BINTRAY_USERNAME -PbintrayKey=$BINTRAY_KEY -PdryRun=false ; then
+              echo "Publish success"
+            else 
+              echo "Publish failure"
+            fi
 workflows:
   version: 2
 
