@@ -55,13 +55,7 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle.kts" }}
 
       - run: 
-          command: |
-            cmd=$(gradle build bintrayUpload -PbintrayUser=$BINTRAY_USERNAME -PbintrayKey=$BINTRAY_KEY -PdryRun=false);
-            if [ "$cmd" ]; then
-              echo "Publish success"
-            else
-              echo "Publish failure"
-            fi
+          command: gradle build bintrayUpload -PbintrayUser=$BINTRAY_USERNAME -PbintrayKey=$BINTRAY_KEY -PdryRun=false
 workflows:
   version: 2
 
