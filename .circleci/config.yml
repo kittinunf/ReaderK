@@ -58,9 +58,9 @@ jobs:
 
       - run: 
           - >
-            if gradle build bintrayUpload -PbintrayUser=$BINTRAY_USERNAME -PbintrayKey=$BINTRAY_KEY -PdryRun=false ; then
+            if [ gradle build bintrayUpload -PbintrayUser=$BINTRAY_USERNAME -PbintrayKey=$BINTRAY_KEY -PdryRun=false ]; then
               echo "Publish success"
-            else 
+            else
               echo "Publish failure"
             fi
 workflows:
