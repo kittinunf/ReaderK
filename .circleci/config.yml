@@ -56,7 +56,8 @@ jobs:
 
       - run: 
           command: |
-            if [ "gradle build bintrayUpload -PbintrayUser=$BINTRAY_USERNAME -PbintrayKey=$BINTRAY_KEY -PdryRun=false" ]; then
+            cmd=$(gradle build bintrayUpload -PbintrayUser=$BINTRAY_USERNAME -PbintrayKey=$BINTRAY_KEY -PdryRun=false);
+            if [ "$cmd" ]; then
               echo "Publish success"
             else
               echo "Publish failure"
