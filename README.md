@@ -1,8 +1,8 @@
 # ReaderK
 
-[![jcenter](https://api.bintray.com/packages/mercari-inc/maven/ReaderK/images/download.svg)](https://bintray.com/mercari-inc/maven/ReaderK/_latestVersion) 
-[![Build Status](https://circleci.com/gh/mercari/ReaderK.svg?style=svg)](https://circleci.com/gh/mercari/ReaderK)
-[![codecov](https://codecov.io/gh/mercari/ReaderK/branch/master/graph/badge.svg)](https://codecov.io/gh/mercari/ReaderK)
+[![jcenter]() 
+[![Build Status]()
+[![codecov]()
 
 A Reader monad implemented in Kotlin
 
@@ -16,17 +16,10 @@ It helps you abstract away the computation into the very last moment (until `run
 
 ### Gradle 
 
-The latest version is [![jcenter](https://api.bintray.com/packages/mercari-inc/maven/ReaderK/images/download.svg)](https://bintray.com/mercari-inc/maven/ReaderK/_latestVersion) 
+The latest version is TBD 
 
 ``` Groovy
-repositories {
-  jcenter()
-}
-
-dependencies {
-  compile 'com.mercari.readerk:readerk:<latest-version>' 
-}
-
+<TBD>
 ```
 
 ## Explanation
