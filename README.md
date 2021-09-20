@@ -103,7 +103,7 @@ fun getStatementReader(accountId: String) =
   ReaderAccounts.getAccount(accountId).flatMap { ReaderAccounts.getStatement(it) }
   
 fun getBalanceReader(accountId: String) =
-  ReaderAccounts.getBalance(accountId).flatMap { ReaderAccounts.getBalance(it) } 
+  ReaderAccounts.getAccount(accountId).flatMap { ReaderAccounts.getBalance(it) } 
 ````
 
 Nice thing about this is that we are not returning the result (yet), however we are returning the gist of steps in our operation as a descriptive `Reader`. The expression up until this point is pure, as it has no execution happening yet. 
